@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import lcd_connection.lcd_connection
 import socket
 
@@ -6,13 +7,18 @@ sock.bind(('', 8080))
 sock.listen(5)
 
 lcd = lcd_connection.lcd_connection.LCDConnection("/dev/ttyAMA0")
-
+lcd.clear()
 while True:
     try:
+        lcd.clear()
         (clientsocket, address) = sock.accept()
-        received = clientsocket.recv(2048)
-        lcd.write(received)
-    except KeyboardInterrupt:
+        received = clientsocket.recv(4096)
+        print(received)
+        lcd.write(received.decode('ascii'))
+        clientsocket.close()
+
+    except (KeyboardInterrupt, OSError):
         print("Exiting")
         sock.shutdown(socket.SHUT_RDWR)
-        sock.close()
+        sock.close()      
+        exit(0)
