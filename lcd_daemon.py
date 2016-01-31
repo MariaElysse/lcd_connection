@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+##
+# Example usage of the LCD Connection module
+# (by example I mean the initial intention)
+# Messages can be sent using the companion sender app, sock.py
+
 import lcd_connection.lcd_connection
 import socket
 

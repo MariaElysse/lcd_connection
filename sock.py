@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+##
+# Sender application for the lcd_daemon program
+# messages typed in here are shown on the screen
+
 import socket
 
 sock=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
