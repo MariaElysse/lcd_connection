@@ -20,10 +20,14 @@ class LCDConnection:
         self.serialport.write(b'\xfe\x01')
 
     def write(self, message):
+        
         wrapped_msg = textwrap.wrap(message, width=self.chars)
+        prev = ""
         for line in wrapped_msg:
             line = (line + ' '*16)[:16]
             self.serialport.write(bytes(line, 'utf-8'))
+            self.serialport.write(bytes(prev, 'utf-8'))
+            prev = line
             time.sleep(self.delay)
 
     def close(self):
