@@ -7,11 +7,10 @@ import Adafruit_Nokia_LCD as LCD
 import Adafruit_GPIO.SPI as SPI
 from PIL import Image, ImageDraw, ImageFont
 import textwrap
-
+import APIKEY.API_KEY as APIKEY
 import time
 
 IMAGE_DIR = "icons/"
-APIKEY = "9c2639dae29c05b601b637b9ea2e544e"
 
 def weatherWriter(connexion):
     weather_dict = {}
