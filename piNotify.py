@@ -58,14 +58,14 @@ def weatherWriter(connexion):
 def update():
     """this function should run forever"""
     start = arrow.now()
-    weather_con_request = requests.get("https://api.forecast.io/forecast/9c2639dae29c05b601b637b9ea2e544e/34.0537,-118.2427?units=si")
+    weather_con_request = requests.get("https://api.forecast.io/forecast/{}/34.0537,-118.2427?units=si".format(APIKEY))    weather = weather_con_request.json()
     weather = weather_con_request.json()
     (receiver, sender) = Pipe()
     p = Process(target=weatherWriter, args=(receiver,))
     p.start()
     while True:
         if (arrow.now() - start).seconds % 300 <5:
-            weather_con_request = requests.get("https://api.forecast.io/forecast/9c2639dae29c05b601b637b9ea2e544e/34.0537,-118.2427?units=si")
+            weather_con_request = requests.get("https://api.forecast.io/forecast/{}/34.0537,-118.2427?units=si".format(APIKEY))
             weather = weather_con_request.json()
         sender.send(weather)
 
