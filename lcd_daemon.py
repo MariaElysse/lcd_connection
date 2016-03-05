@@ -15,10 +15,11 @@ lcd = lcd_connection.lcd_connection.LCDConnection("/dev/ttyAMA0")
 lcd.clear()
 while True:
     try:
-        lcd.clear()
         (clientsocket, address) = sock.accept()
         received = clientsocket.recv(4096)
         print(received)
+        lcd.clear()
+        lcd.write(received.decode('ascii'))
         clientsocket.close()
 
     except (KeyboardInterrupt, OSError):
@@ -26,4 +27,3 @@ while True:
         sock.shutdown(socket.SHUT_RDWR)
         sock.close()      
         exit(0)
-    lcd.write(received.decode('ascii'))
