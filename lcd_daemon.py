@@ -19,7 +19,6 @@ while True:
         (clientsocket, address) = sock.accept()
         received = clientsocket.recv(4096)
         print(received)
-        lcd.write(received.decode('ascii'))
         clientsocket.close()
 
     except (KeyboardInterrupt, OSError):
@@ -27,3 +26,4 @@ while True:
         sock.shutdown(socket.SHUT_RDWR)
         sock.close()      
         exit(0)
+    lcd.write(received.decode('ascii'))
